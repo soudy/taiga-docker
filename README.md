@@ -3,7 +3,7 @@ This repository holds an image ready-to-use setup for Taiga using Docker
 compose. You can launch an instance by simply running `docker-compose up`.
 
 Copy-paste instructions for the lazy:
-```
+```sh
 git clone git@github.com:soudy/taiga-docker.git --recursive
 cd taiga-docker
 docker-compose up # or build, whatever you want
