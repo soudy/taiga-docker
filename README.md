@@ -10,9 +10,9 @@ docker-compose up # or build, whatever you want
 ```
 
 ## Configuration
-Application configuration can be done in `taiga-conf/local.py` and
-`taiga-conf/conf.json`. The most important thing is setting your hostname both
-in `docker-compose.yml` and `taiga-conf/conf.json`, otherwise the front-end
+Application configuration can be done in `config/local.py` and
+`config/conf.json`. The most important thing is setting your hostname both
+in `docker-compose.yml` and `config/conf.json`, otherwise the front-end
 won't be able to talk with the back-end.
 
 ## Swarm
