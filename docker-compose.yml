@@ -9,16 +9,16 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./database:/var/lib/postgresql/data
+    network_mode: my-net
 
   taiga:
     build: .
     ports:
       - 80:80
       # - 443:443 # To enable SSL, uncomment this line
-    links:
-      - postgres
     restart: always
     environment:
+      TAIGA_SLEEP: 20
       TAIGA_HOSTNAME: localhost
       # TAIGA_SSL: 'true' # To enable SSL, uncomment this line
 
@@ -29,3 +29,4 @@ services:
     volumes:
       - ./media:/usr/src/taiga-back/media
       - ./taiga-conf:/taiga
+    network_mode: my-net

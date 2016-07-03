@@ -11,5 +11,5 @@ RUN pip install --no-cache-dir taiga-contrib-slack
 
 ADD https://github.com/taigaio/taiga-contrib-slack/raw/master/front/dist/slack.js /usr/src/taiga-front-dist/dist/slack.js
 
-COPY taiga-conf/local.py /taiga/local.py
-COPY taiga-conf/conf.json /taiga/conf.json
+COPY config/local.py /taiga/local.py
+COPY config/conf.json /taiga/conf.json
