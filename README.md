@@ -77,12 +77,12 @@ manager    -        virtualbox   Running   tcp://192.168.99.105:2376   manager (
 
 ### Create the overlay Network
 1. Set your docker environment to the Swarm master.
-```
+```bash
 $ eval "$(docker-machine env --swarm manager)"
 ```
 
 2. Use the docker info command to view the Swarm
-```
+```bash
 Containers: 4
  Running: 4
  Paused: 0
@@ -128,12 +128,12 @@ Operating System: linux
 Architecture: amd64
 ```
 3. Create your overlay network.
-```
+```bash
 $ docker network create --driver overlay --subnet=10.0.9.0/24 my-net
 ```
 
 4. Check that the network is running
-```
+```bash
 $ docker network ls
 NETWORK ID          NAME                DRIVER
 f2eab9a20968        agent1/bridge       bridge
@@ -149,16 +149,16 @@ c6169c7df609        manager/host        host
 ```
 ### Running the application
 1. Point your environment to the Swarm master.
-```
+```bash
 $ eval "$(docker-machine env --swarm manager)"
 ```
 
 2. Start the containers.
-```
+```bash
 $ docker-compose up -d
 ```
 
 3. Scale up as much as you want!
-```
+```bash
 $ docker-compose scale postgres=4
 ```
