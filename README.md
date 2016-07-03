@@ -39,41 +39,41 @@ I will now describe how to set up a Docker swarm for taiga.
         progrium/consul -server -bootstrap
     ```
 4. Verify it's running by checking `docker ps`
-    ```bash
-    $ docker ps
-    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                                            NAMES
-    32c13b3a0ece        progrium/consul     "/bin/start -server -"   27 seconds ago      Up 27 seconds       53/tcp, 53/udp, 8300-8302/tcp, 8400/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp   distracted_payne
-    ```
+```bash
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                                            NAMES
+32c13b3a0ece        progrium/consul     "/bin/start -server -"   27 seconds ago      Up 27 seconds       53/tcp, 53/udp, 8300-8302/tcp, 8400/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp   distracted_payne
+```
 
 ### Create a Swarm cluster
 1. Create a swarm master.
-    ```bash
-    $ docker-machine create \
-        -d virtualbox \
-        --swarm --swarm-master \
-        --swarm-discovery="consul://$(docker-machine ip keystore):8500" \
-        --engine-opt="cluster-store=consul://$(docker-machine ip keystore):8500" \
-        --engine-opt="cluster-advertise=eth1:2376" \
-        manager
-    ```
+```bash
+$ docker-machine create \
+    -d virtualbox \
+    --swarm --swarm-master \
+    --swarm-discovery="consul://$(docker-machine ip keystore):8500" \
+    --engine-opt="cluster-store=consul://$(docker-machine ip keystore):8500" \
+    --engine-opt="cluster-advertise=eth1:2376" \
+    manager
+```
 2. Create as many additional hosts as you want. I went with 2.
-    ```bash
-    $ docker-machine create -d virtualbox \
-        --swarm \
-        --swarm-discovery="consul://$(docker-machine ip keystore):8500" \
-        --engine-opt="cluster-store=consul://$(docker-machine ip keystore):8500" \
-        --engine-opt="cluster-advertise=eth1:2376" \
-        agent1
-    ```
+```bash
+$ docker-machine create -d virtualbox \
+    --swarm \
+    --swarm-discovery="consul://$(docker-machine ip keystore):8500" \
+    --engine-opt="cluster-store=consul://$(docker-machine ip keystore):8500" \
+    --engine-opt="cluster-advertise=eth1:2376" \
+    agent1
+```
 3. List your machines to verify they're running.
-    ```bash
-    $ docker-machine ls
-    NAME       ACTIVE   DRIVER       STATE     URL                         SWARM              DOCKER    ERRORS
-    agent1     -        virtualbox   Running   tcp://192.168.99.106:2376   manager            v1.11.2
-    agent2     -        virtualbox   Running   tcp://192.168.99.107:2376   manager            v1.11.2
-    keystore   -        virtualbox   Running   tcp://192.168.99.104:2376                      v1.11.2
-    manager    -        virtualbox   Running   tcp://192.168.99.105:2376   manager (master)   v1.11.2
-    ```
+```bash
+$ docker-machine ls
+NAME       ACTIVE   DRIVER       STATE     URL                         SWARM              DOCKER    ERRORS
+agent1     -        virtualbox   Running   tcp://192.168.99.106:2376   manager            v1.11.2
+agent2     -        virtualbox   Running   tcp://192.168.99.107:2376   manager            v1.11.2
+keystore   -        virtualbox   Running   tcp://192.168.99.104:2376                      v1.11.2
+manager    -        virtualbox   Running   tcp://192.168.99.105:2376   manager (master)   v1.11.2
+```
 
 ### Create the overlay Network
 1. Set your docker environment to the Swarm master.
