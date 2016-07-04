@@ -149,6 +149,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
     6e637616d970        manager/none        null
     2349f4d38af5        my-net              overlay
     ```
+
 ### Running the application
 1. Point your environment to the Swarm master.
     ```bash
